@@ -25,12 +25,12 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>List of Categories</h2>
+                        <h2>Danh sách Thể Loại</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
 
-                        <div class="alert alert-success alert-dismissible fade in" role="alert" th:if="${authorInUse}">
+                        <div class="alert alert-success alert-dismissible fade in" role="alert" th:if="${categoryInUse}">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                             <span>Category has related Book(s), cannot be deleted.</span>
                         </div>
@@ -40,24 +40,22 @@
                             <thead>
                             <tr>
                                 <th style="width: 50px;">ID</th>
-                                <th style="width: 150px;">Mã Tác Giả</th>
-                                <th style="width: 150px;">Tên Tác Giả</th>
-                                <th>Website</th>
+                                <th style="width: 150px;">Mã Thể Loại</th>
+                                <th style="width: 150px;">Tên Thể Loại</th>
                                 <th style="width: 50px;">Ghi Chú</th>
-                                <th style="width: 50px;">Actions</th>
+                                <th style="width: 30px;">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="a : ${authors}">
-                                <td th:text="${a.id}"></td>
-                                <td th:text="${a.authorCode}"></td>
-                                <td th:text="${a.authorName}"></td>
-                                <td th:text="${a.website}"></td>
-                                <td th:text="${a.note}"></td>
+                            <tr th:each="c : ${bookCategories}">
+                                <td th:text="${c.id}"></td>
+                                <td th:text="${c.bookCategoryCode}"></td>
+                                <td th:text="${c.bookCategoryName}"></td>
+                                <td th:text="${c.note}"></td>
                                 <td>
-                                    <a th:href="@{'/author/edit/' + ${a.id}}" ><i class="fa fa-edit" style="margin-right: 20px"></i></a>
-                                    <a data-toggle="modal" data-target=".remove-author-modal" onclick="removeAuthorDialog(this);"
-                                       th:data-author-id="${a.id}" th:data-author-name="${a.authorName}" style="cursor: pointer;">
+                                    <a th:href="@{'/book-category/edit/' + ${c.id}}" ><i class="fa fa-edit" style="margin-right: 20px"></i></a>
+                                    <a data-toggle="modal" data-target=".remove-category-modal" onclick="removeBookCategoryDialog(this);"
+                                       th:data-category-id="${c.id}" th:data-category-name="${c.bookCategoryName}" style="cursor: pointer;">
                                         <i class="fa fa-remove"></i>
                                     </a>
                                 </td>
@@ -70,7 +68,7 @@
         </div>
         <!-- /page content -->
 
-        <div class="modal fade remove-author-modal" tabindex="-1"
+        <div class="modal fade remove-category-modal" tabindex="-1"
              role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -80,15 +78,15 @@
                                 aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
-                        <h4 class="modal-title">Xóa Tác Giả</h4>
+                        <h4 class="modal-title">Xóa Thể Loại Sách</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to remove <br/><strong><span id="author-name"></span></strong>?</p>
+                        <p>Bạn có chắc chắn muốn xóa <br/><strong><span id="category-name"></span></strong>?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default"
-                                data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" onclick="removeAuthor();">Yes!</button>
+                                data-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-primary" onclick="removeBookCategory();">Đồng ý!</button>
                     </div>
 
                 </div>
@@ -102,6 +100,6 @@
 
 <th:block th:replace="fragments/scripts :: common"></th:block>
 <th:block th:replace="fragments/scripts :: datatable"></th:block>
-<script th:src="@{/custom/js/author/list.js}"></script>
+<script th:src="@{/custom/js/book-category/list.js}"></script>
 </body>
 </html>
