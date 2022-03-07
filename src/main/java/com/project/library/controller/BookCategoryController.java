@@ -42,7 +42,7 @@ public class BookCategoryController {
 	}
 	
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String editAuthor(@PathVariable("id") Long categoryId, Model model) {
+    public String editBookCategory(@PathVariable("id") Long categoryId, Model model) {
     	Optional<BookCategory> bookCategoryEdit = bookCategoryService.findBookCategoryById(categoryId);
     	
   

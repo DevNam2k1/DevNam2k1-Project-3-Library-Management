@@ -25,8 +25,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2 th:if="${bookCategory.id==null}">Thêm Thể Loại Sách</h2>
-                            <h2 th:if="${bookCategory.id!=null}">Sửa Thể Loại Sách</h2>
+                            <h2 th:if="${bookStore.id==null}">Thêm Kho Sách</h2>
+                            <h2 th:if="${bookStore.id!=null}">Sửa Kho Sách</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -36,25 +36,25 @@
                             </div>
                             <br/>
 
-                            <form th:action="@{/book-category/save}" method="post" th:object="${bookCategory}" class="form-horizontal form-label-left">
+                            <form th:action="@{/book-store/save}" method="post" th:object="${bookStore}" class="form-horizontal form-label-left">
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bookCategoryCode">Mã Thể Loại <span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bookCategoryCode">Mã Kho Sách <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" th:field="*{bookCategoryCode}" class="form-control col-md-7 col-xs-12">
+                                        <input type="text" th:field="*{bookStoreCode}" class="form-control col-md-7 col-xs-12">
                                     </div>
                                     <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
-                                        <span th:if="${#fields.hasErrors('bookCategoryCode')}" th:errors="*{bookCategoryCode}"></span>
+                                        <span th:if="${#fields.hasErrors('bookStoreCode')}" th:errors="*{bookStoreCode}"></span>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >Tên Thể Loại <span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >Tên Kho Sách <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" th:field="*{bookCategoryName}" class="form-control col-md-7 col-xs-12">
+                                        <input type="text" th:field="*{bookStoreName}" class="form-control col-md-7 col-xs-12">
                                     </div>
                                     <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
-                                        <span th:if="${#fields.hasErrors('bookCategoryName')}" th:errors="*{bookCategoryName}"></span>
+                                        <span th:if="${#fields.hasErrors('bookStoreName')}" th:errors="*{bookStoreName}"></span>
                                     </div>
                                 </div>
 
@@ -100,6 +100,6 @@
 </div>
 
 <th:block th:replace="fragments/scripts :: common"></th:block>
-<script th:src="@{/custom/js/book-category/form.js}"></script>
+<script th:src="@{/custom/js/book-store/form.js}"></script>
 </body>
 </html>

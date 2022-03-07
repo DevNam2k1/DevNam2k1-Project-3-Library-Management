@@ -1,12 +1,12 @@
-var bookCategoryId, bookCategoryName;
+var bookStoreId, bookStoreName;
 
-function removeBookCategoryDialog(el) {
-    authorId = $(el).attr('data-category-id');
-    authorName = $(el).attr('data-category-name');
-    $('.remove-category-modal').find('#category-name').text(authorName);
+function removeBookStoreDialog(el) {
+    bookStoreId = $(el).attr('data-store-id');
+    bookStoreName = $(el).attr('data-store-name');
+    $('.remove-book-store-modal').find('#book-store-name').text(bookStoreName);
 }
 
-function removeBookCategory() {
-    $('.remove-category-modal').modal('hide');
-    window.location = "/book-category/remove/" + bookCategoryId;
+function removeBookStore() {
+    $('.remove-book-store-modal').modal('hide');
+    window.location = "/book-store/remove/" + bookStoreId;
 }
