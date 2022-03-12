@@ -45,4 +45,9 @@ public class BookCategoryServiceImpl implements BookCategoryService{
 		
 	}
 
+	@Override
+	public List<BookCategory> getAllBySort() {
+		return bookCategoryRepository.findAllByOrderByBookCategoryNameAsc();
+	}
+
 }

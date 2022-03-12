@@ -1,10 +1,15 @@
 package com.project.library.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -38,6 +43,19 @@ public class Producer {
 	@NotBlank(message = "*Vui lòng nhập tên người đại diện!")
 	@Column(name = "representative", length = 100, nullable = false)
 	private String representative;
+
+	@OneToMany(mappedBy = "producer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Book> book;
+	
+	
+	
+	public List<Book> getBook() {
+		return book;
+	}
+
+	public void setBook(List<Book> book) {
+		this.book = book;
+	}
 
 	public Long getId() {
 		return id;

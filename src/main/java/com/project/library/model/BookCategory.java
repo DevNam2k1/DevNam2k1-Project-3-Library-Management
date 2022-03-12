@@ -1,12 +1,19 @@
 package com.project.library.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "book_category")
@@ -18,6 +25,7 @@ public class BookCategory {
 	private Long id;
 	
 	@NotBlank(message = "*Vui lòng nhập mã loại sách")
+	@Length(max = 3, message = "*Must not exceed 3 characters.")
 	@Column(name = "book_category_code", length = 10, nullable = false)
 	private String bookCategoryCode;
 	
@@ -25,7 +33,18 @@ public class BookCategory {
 	@Column(name = "book_category_name", length = 100, nullable = false)
 	private String bookCategoryName;
 	
+
 	
+	@OneToMany(mappedBy = "bookCategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Book> books;
+	
+	
+	public List<Book> getBooks() {
+		return books;
+	}
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
 	private String note;
 	
 	

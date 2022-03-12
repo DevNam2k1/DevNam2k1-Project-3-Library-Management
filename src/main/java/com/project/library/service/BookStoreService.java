@@ -15,4 +15,6 @@ public interface BookStoreService {
     void deleteBookStore(Long id);
 
     Optional<BookStore> findBookStoreById(Long id);
+    
+    List<BookStore> getAllBySort();
 }

@@ -73,7 +73,7 @@ public class BookCategoryController {
     }
     
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
-    public String deleteAuthor(@PathVariable("id") Long categoryId, Model model){
+    public String deleteBookCategory(@PathVariable("id") Long categoryId, Model model){
     	bookCategoryService.deleteBookCategory(categoryId);
         return "redirect:/book-category";
     }

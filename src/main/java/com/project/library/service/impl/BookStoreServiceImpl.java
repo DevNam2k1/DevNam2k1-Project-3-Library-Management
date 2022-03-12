@@ -43,4 +43,9 @@ public class BookStoreServiceImpl implements BookStoreService{
 		return bookStoreRepository.findById(id);
 	}
 
+	@Override
+	public List<BookStore> getAllBySort() {
+		return bookStoreRepository.findAllByOrderByBookStoreNameAsc();
+	}
+
 }

@@ -17,4 +17,6 @@ public interface ProducerService {
     void deleteProducer(Long id);
 
     Optional<Producer> findProducerById(Long id);
+    
+    List<Producer> getAllBySort();
 }

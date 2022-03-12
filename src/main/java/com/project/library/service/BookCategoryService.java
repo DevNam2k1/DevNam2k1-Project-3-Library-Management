@@ -15,4 +15,6 @@ public interface BookCategoryService {
     void deleteBookCategory(Long id);
 
     Optional<BookCategory> findBookCategoryById(Long id);
+    
+    List<BookCategory> getAllBySort();
 }

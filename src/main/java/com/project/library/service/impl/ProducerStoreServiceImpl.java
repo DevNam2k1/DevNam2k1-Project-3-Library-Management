@@ -45,4 +45,9 @@ public class ProducerStoreServiceImpl implements ProducerService{
 		return producerRepository.findById(id);
 	}
 
+	@Override
+	public List<Producer> getAllBySort() {
+		return producerRepository.findAllByOrderByProducerNameAsc();
+	}
+
 }
