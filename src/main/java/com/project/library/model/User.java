@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
@@ -22,10 +23,12 @@ public class User {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
+
+	@NotBlank(message = "Vui lòng nhập tên tài khoản!")
 	@Column(name = "username")
     private String username;
-	
+
+	@NotBlank(message = "Vui lòng nhập mật khẩu!")
 	@Column(name = "password")
     private String password;
     private boolean enabled;

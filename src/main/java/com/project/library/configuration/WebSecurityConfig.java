@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.project.library.service.impl.UserDetailsServiceImpl;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -49,9 +50,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .antMatchers("/delete/**").hasAuthority("ADMIN")
             .anyRequest().authenticated()
             .and()
-            .formLogin().loginPage("/login").permitAll()
+            .formLogin().loginPage("/login").defaultSuccessUrl("/home").permitAll()
             .and()
-            .logout().permitAll()
+            .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/").and().exceptionHandling()
+                .accessDeniedPage("/access-denied")
             .and()
             .exceptionHandling().accessDeniedPage("/403")
             ;
