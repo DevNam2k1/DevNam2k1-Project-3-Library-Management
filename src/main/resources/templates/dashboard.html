@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spark LMS - Book Form</title>
+
+    <th:block th:replace="fragments/styles :: common"></th:block>
+
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+        <th:block th:replace="fragments/sidemenu :: menu"></th:block>
+        <th:block th:replace="fragments/topmenu :: menu"></th:block>
+
+        <h1>Hướng dẫn sử dụng phần mềm</h1>
+        <!-- /page content -->
+
+        <th:block th:replace="fragments/footer :: footer"></th:block>
+
+    </div>
+</div>
+
+<th:block th:replace="fragments/scripts :: common"></th:block>
+<script th:src="@{/custom/js/author/form.js}"></script>
+</body>
+</html>
