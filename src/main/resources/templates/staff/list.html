@@ -40,26 +40,29 @@
                             <thead>
                             <tr>
                                 <th style="width: 20px;">ID</th>
-                                <th style="width: 50px;">Mã Nhà Sản Xuất</th>
-                                <th style="width: 50px;">Tên Nhà Sản Xuất</th>
-                                <th style="width: 50px;">Email</th>
-                                <th style="width: 100px;">Địa Chỉ</th>
-                                <th style="width: 50px;">Người Đại Diện</th>
+                                <th style="width: 50px;">Mã Nhân Viên</th>
+                                <th style="width: 50px;">Tên Nhân Viên</th>
+                                <th style="width: 100px;">Giới Tính</th>
+                                <th style="width: 100px;">Số Điện Thoại</th>
+                                <th style="width: 50px;">Tuổi</th>
+                                <th style="width: 50px;">Quyền</th>
                                 <th style="width: 30px;">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="p : ${produceres}">
-                                <td th:text="${p.id}"></td>
-                                <td th:text="${p.producerCode}"></td>
-                                <td th:text="${p.producerName}"></td>
-                                <td th:text="${p.producerEmail}"></td>
-                                <td th:text="${p.producerAddress}"></td>
-                                <td th:text="${p.representative}"></td>
+                            <tr th:each="u : ${users}">
+                                <td th:text="${u.id}"></td>
+                                <td th:text="${u.staff.staffCode}"></td>
+                                <td th:text="${u.staff.staffName}"></td>
+                                <td th:text="${u.staff.gender}"></td>
+                                <td th:text="${u.staff.phoneNumber}"></td>
+                                <td th:text="${#dates.year(#dates.createToday()) - #dates.year(u.staff.dateOfBirth)}"></td>
+                                <td th:text="${u.roles}"></td>
                                 <td>
-                                    <a th:href="@{'/producer/edit/' + ${p.id}}" ><i class="fa fa-edit" style="margin-right: 20px"></i></a>
+                                    <a th:href="@{'/staff/edit/' + ${u.staff.id}}" ><i class="fa fa-edit" style="margin-right: 20px"></i></a>
+                                    <a th:href="@{'/staff/authentication/edit/' + ${u.id}}" ><i class="fa fa-user-plus" style="margin-right: 20px"></i></a>
                                     <a data-toggle="modal" data-target=".remove-producer-modal" onclick="removeProducerDialog(this);"
-                                       th:data-producer-id="${p.id}" th:data-producer-name="${p.producerName}" style="cursor: pointer;">
+                                       th:data-producer-id="${u.id}" th:data-producer-name="${u.username}" style="cursor: pointer;">
                                         <i class="fa fa-remove"></i>
                                     </a>
                                 </td>

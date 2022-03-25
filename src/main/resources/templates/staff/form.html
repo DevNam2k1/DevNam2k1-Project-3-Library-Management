@@ -25,8 +25,8 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2 th:if="${producer.id==null}">Thêm Nhà Sản Xuất</h2>
-                            <h2 th:if="${producer.id!=null}">Sửa Nhà Sản Xuất</h2>
+                            <h2 th:if="${staff.id==null}">Thêm Nhân Viên</h2>
+                            <h2 th:if="${staff.id!=null}">Sửa Thông Tin Nhân Viên</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -36,57 +36,63 @@
                             </div>
                             <br/>
 
-                            <form th:action="@{/producer/save}" method="post" th:object="${producer}" class="form-horizontal form-label-left">
+                            <form th:action="@{/staff/save}" method="post" th:object="${staff}" class="form-horizontal form-label-left">
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="bookCategoryCode">Mã Nhà Xuất Bản <span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >Mã Nhân Viên <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" th:field="*{producerCode}" class="form-control col-md-7 col-xs-12">
+                                        <input type="text" th:field="*{staffCode}" class="form-control col-md-7 col-xs-12">
                                     </div>
                                     <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
-                                        <span th:if="${#fields.hasErrors('producerCode')}" th:errors="*{producerCode}"></span>
+                                        <span th:if="${#fields.hasErrors('staffCode')}" th:errors="*{staffCode}"></span>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >Tên Nhà Xuất Bản <span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >Tên Nhân Viên <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" th:field="*{producerName}" class="form-control col-md-7 col-xs-12">
+                                        <input type="text" th:field="*{staffName}" class="form-control col-md-7 col-xs-12">
                                     </div>
                                     <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
-                                        <span th:if="${#fields.hasErrors('producerName')}" th:errors="*{producerName}"></span>
+                                        <span th:if="${#fields.hasErrors('staffName')}" th:errors="*{staffName}"></span>
                                     </div>
                                 </div>
 
-								<div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >Email <span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" th:field="*{producerEmail}" class="form-control col-md-7 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Giới Tính <span class="required">*</span></label>
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <select th:field="*{gender}" class="form-control">
+                                            <option th:value="'Male'" th:text="Male"></option>
+                                            <option th:value="'Female'" th:text="Female"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Ngày Sinh <span class="required">*</span></label>
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+
+                                        <input type="text" class="form-control" data-inputmask="'mask': '99-Aaa-9999'" name="dateOfBirth" id="dateOfBirth"
+                                               th:value="${staff.dateOfBirth}?${#dates.format(staff.dateOfBirth, 'dd-MMM-yyyy')}:''" >
+                                        <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                                     </div>
                                     <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
-                                        <span th:if="${#fields.hasErrors('producerEmail')}" th:errors="*{producerEmail}"></span>
+                                        <span id="dobErr"></span>
+                                        <span th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
                                     </div>
                                 </div>
                                 
   								<div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >Địa Chỉ <span class="required">*</span></label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >Số Điện Thoại<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" th:field="*{producerAddress}" class="form-control col-md-7 col-xs-12">
+                                        <input type="text" th:field="*{phoneNumber}" class="form-control col-md-7 col-xs-12">
                                     </div>
                                     <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
-                                        <span th:if="${#fields.hasErrors('producerAddress')}" th:errors="*{producerAddress}"></span>
+                                        <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
                                     </div>
                                 </div>
                                                               
-  								<div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" >Người Đại Diện <span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" th:field="*{representative}" class="form-control col-md-7 col-xs-12">
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12 mt-5">
-                                        <span th:if="${#fields.hasErrors('representative')}" th:errors="*{representative}"></span>
-                                    </div>
-                                </div>
+
 
                                 <input type="hidden" th:if="${id!=null}" th:field="*{id}" />
 <!--                                <input type="hidden" th:field="*{status}" />-->
@@ -119,6 +125,8 @@
 </div>
 
 <th:block th:replace="fragments/scripts :: common"></th:block>
-<script th:src="@{/custom/js/producer/form.js}"></script>
+
+<script th:src="@{/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js}"></script>
+<script th:src="@{/custom/js/staff/form.js}"></script>
 </body>
 </html>

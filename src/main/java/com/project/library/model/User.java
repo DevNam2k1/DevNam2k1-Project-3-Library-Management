@@ -1,28 +1,27 @@
 package com.project.library.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 	@Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+	@NotEmpty(message = "Email can not be empty")
+	@Email(message = "Please provide a valid email id")
+	@Column(name = "email", unique = true)
+	private String email;
 
 	@NotBlank(message = "Vui lòng nhập tên tài khoản!")
 	@Column(name = "username")
@@ -40,8 +39,24 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
             )
     private Set<Role> roles = new HashSet<>();
- 
-    public Long getId() {
+
+	@OneToOne
+	@JoinColumn(name = "staff_id")
+	private Staff staff;
+
+	public void addRole(Role role) {
+		this.roles.add(role);
+	}
+
+	public Staff getStaff() {
+		return staff;
+	}
+
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -79,5 +94,13 @@ public class User {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

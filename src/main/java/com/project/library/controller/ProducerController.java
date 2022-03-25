@@ -19,7 +19,7 @@ import com.project.library.service.ProducerService;
 
 @Controller
 @RequestMapping(value = "/producer")
-public class ProducerCotroller {
+public class ProducerController {
 	
 	@Autowired
 	private ProducerService producerService;

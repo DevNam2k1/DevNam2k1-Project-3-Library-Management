@@ -19,6 +19,12 @@
     <section class="login_content">
       <form th:action="@{/login}" method="post" id="loginform">
         <h1>Đăng Nhập</h1>
+        <div th:if="${param.error}" style="color: red" t>
+          <h5>Invalid username and password.</h5>
+        </div>
+        <div th:if="${param.logout}" style="color: #00CC33">
+          <h3>You have been logged out.</h3>
+        </div>
         <div>
           <input type="text" class="form-control" placeholder="Username" name="username" />
         </div>
