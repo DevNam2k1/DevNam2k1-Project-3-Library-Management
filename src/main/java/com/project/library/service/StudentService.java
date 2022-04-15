@@ -16,4 +16,6 @@ public interface StudentService {
 	void deleteStudent(Long id);
 
 	Optional<Student> findStudentById(Long id);
+
+	List<Student> getAllBySort();
 }

@@ -17,4 +17,6 @@ public interface BookCategoryService {
     Optional<BookCategory> findBookCategoryById(Long id);
     
     List<BookCategory> getAllBySort();
+
+    BookCategory get(Long id);
 }

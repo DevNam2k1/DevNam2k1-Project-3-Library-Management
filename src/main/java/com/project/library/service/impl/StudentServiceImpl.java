@@ -45,4 +45,9 @@ public class StudentServiceImpl implements StudentService{
 		return studentRepository.findById(id);
 	}
 
+	@Override
+	public List<Student> getAllBySort() {
+		return studentRepository.findAllByOrderByStudentNameAsc();
+	}
+
 }

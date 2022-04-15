@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
@@ -32,9 +33,10 @@ public class BookCategory {
 	@NotBlank(message = "*Vui lòng nhập loại sách")
 	@Column(name = "book_category_name", length = 100, nullable = false)
 	private String bookCategoryName;
-	
 
-	
+
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "bookCategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Book> books;
 	

@@ -1,5 +1,7 @@
 package com.project.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,7 +31,8 @@ public class BookStore {
 	@NotBlank(message = "*Vui lòng nhập tên kho sách")
 	@Column(name = "book_store_name", length = 100, nullable = false)
 	private String bookStoreName;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "bookStore", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Book> book;
 	

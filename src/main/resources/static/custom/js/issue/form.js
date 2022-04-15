@@ -1,4 +1,19 @@
 $(document).ready(function() {
+
+	$('#addBook').on('click', function() {
+		var id = $('#booksSel').val();
+		var title = $("#booksSel option:selected").text();
+		var tag = $("#booksSel option:selected").attr("data-tag");
+		var price = $("#booksSel option:selected").attr("data-price");
+		var depositPrice = $("#booksSel option:selected").attr("data-deposit-price");
+
+		if( id && !bookAlreadyExist(id) && title && tag && price && depositPrice) {
+			var book = { id: id, title: title, tag: tag, price: price , depositPrice: depositPrice};
+			booksToIssue.push(book);
+			$('#booksSel').val('');
+			initBooksInTable();
+		}
+	});
 	
 	var members = [];
 	function initMembers() {
@@ -24,7 +39,7 @@ $(document).ready(function() {
 		$('#memberSel').empty().append('<option selected="selected" value="">-- Select Member --</option>');
 		$.each(membersList, function(k, v) {   
 		     $('#memberSel').append($("<option></option>")
-		                    .attr("value",v.id).text(v.firstName + ' ' + v.middleName + (v.lastName?' '+v.lastName:'') )); 
+		                    .attr("value",v.id).text(v.name));
 		});
 	}
 	
@@ -38,7 +53,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	
+	// action of book category
 	function getBooksByCategory(value) {
 		$.get('/rest/book/' + value + '/available', function(data) {
 			if( data ) {
@@ -51,10 +66,10 @@ $(document).ready(function() {
 		$('#booksSel').empty().append('<option selected="selected" value="">-- Select Book --</option>');
 		$.each(booksList, function(k, v) {   
 		     $('#booksSel').append($("<option></option>")
-		                    .attr("value",v.id).text(v.title)
-		                    .attr("data-authors", v.authors)
-		                    .attr("data-tag", v.tag)
-		                    .attr("data-publisher", v.publisher));
+		                    .attr("value",v.id).text(v.bookName)
+				 			.attr("data-price", v.borrowPrice)
+				 			.attr("data-deposit-price", v.depositPrice)
+		                    .attr("data-tag", v.bookCode));
 		});
 	}
 	
@@ -68,19 +83,7 @@ $(document).ready(function() {
 	});
 	
 	
-	$('#addBookBtn').on('click', function() {
-		var id = $('#booksSel').val();
-		var title = $("#booksSel option:selected").text();
-		var tag = $("#booksSel option:selected").attr("data-tag");
-		var authors = $("#booksSel option:selected").attr("data-authors");
-		
-		if( id && !bookAlreadyExist(id) && title && tag && authors ) {
-			var book = { id: id, title: title, tag: tag, authors: authors };
-			booksToIssue.push(book);
-			$('#booksSel').val('');
-			initBooksInTable();
-		}
-	});
+
 	
 	function bookAlreadyExist(id) {
 		for(var k=0 ; k<booksToIssue.length ; k++) {
@@ -99,9 +102,10 @@ $(document).ready(function() {
 		} else {
 			var issue = { 
 					member: $('#memberSel').val(),
+				    total: $('#total').text(),
 					books: getIssuedBookIds().join()
 			}
-			$.post( "/rest/issue/save", issue).done(function (data){
+			$.get( "/rest/issue/save", issue).done(function (data){
 				if( data=='success' ) {
 					window.location = '/issue/new';
 				}
@@ -132,22 +136,36 @@ $(document).ready(function() {
 });
 
 var booksToIssue = [];
+console.log(booksToIssue);
 
 function initBooksInTable() {
-	
+	console.log('here', booksToIssue.length);
 	var trs = '';
+	var total = 0;
+	var totalBook = 0;
+
 	for( var k=0 ; k<booksToIssue.length ; k++ ) {
 		var rowNum = k+1;
 		trs += '<tr>';
 		trs += '<td>'+rowNum+'</td>';
 		trs += '<td>'+booksToIssue[k].tag+'</td>';
 		trs += '<td>'+booksToIssue[k].title+'</td>';
-		trs += '<td>'+booksToIssue[k].authors+'</td>';
+		trs += '<td>'+new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(booksToIssue[k].price)+'</td>';
+		trs += '<td>'+new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(booksToIssue[k].depositPrice)+'</td>';
 		trs += '<td><a href="javascript:void(0)"  onclick="removeFromTable('+rowNum+', '+booksToIssue[k].id+')"><i class="fa fa-remove"></i></a></td>';
 		trs += '</tr>';
+
+		totalBook = parseFloat(booksToIssue[k].price) + parseFloat(booksToIssue[k].depositPrice);
+		total += totalBook;
+
+
 	}
+	console.log(total);
 	$("#issueBooksTable").find("tr:gt(0)").remove();
 	$('#issueBooksTable').append( trs );
+	$('#total').text(new Intl.NumberFormat('de-DE').format(total));
+
+
 }
 
 function removeFromTable(rowNum, id) {

@@ -58,7 +58,7 @@ public class GradeController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addGrade(Model model){
-    	Grade grade = new Grade();
+
         model.addAttribute("grade", new Grade());
 
         return "grade/form";

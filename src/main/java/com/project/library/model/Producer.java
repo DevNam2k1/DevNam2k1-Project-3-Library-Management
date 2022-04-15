@@ -1,5 +1,7 @@
 package com.project.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -44,6 +46,7 @@ public class Producer {
 	@Column(name = "representative", length = 100, nullable = false)
 	private String representative;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "producer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Book> book;
 	

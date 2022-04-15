@@ -1,15 +1,10 @@
 package com.project.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -37,6 +32,29 @@ public class Student {
 	@NotBlank(message = "Please enter student code")
 	@Column(name = "studentCode", length = 100, nullable = false)
 	private String studentCode;
+
+	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private LibraryCard libraryCard;
+
+	@Column(name = "status", nullable = false)
+	private Integer status;
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public LibraryCard getLibraryCard() {
+		return libraryCard;
+	}
+
+	public void setLibraryCard(LibraryCard libraryCard) {
+		this.libraryCard = libraryCard;
+	}
 
 	public String getStudentCode() {
 		return studentCode;

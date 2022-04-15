@@ -1,5 +1,7 @@
 package com.project.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -44,7 +46,8 @@ public class Author implements Serializable{
     
     @Column(name = "note", length = 100, nullable = false)
 	private String note;
-    
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Book> book;
 	

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.project.library.common.Constants;
 import com.project.library.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,10 +75,12 @@ public class StudentController {
         }
         System.out.println("hello:" + student.toString());
         if(student.getId() == null){
+            student.setStatus(Constants.STUDENT_NOT_STATUS);
         	studentService.addNew(student);
             redirectAttributes.addFlashAttribute("successMsg", "'" + student.getStudentName() + "' đã được thêm sv mới.");
             return "redirect:/student/add";
         } else {
+            student.setStatus(Constants.STUDENT_NOT_STATUS);
         	Student updateStudent = studentService.saveStudent(student);
             redirectAttributes.addFlashAttribute("successMsg", "Thay đổi '" + student.getStudentName() + "' thành công. ");
             return "redirect:/student/edit/"+updateStudent.getId();

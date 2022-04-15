@@ -41,6 +41,17 @@ public class Staff implements Serializable {
     @OneToOne(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private User users;
 
+    @OneToMany( mappedBy = "staff",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<CallCard> callCards;
+
+    public List<CallCard> getCallCards() {
+        return callCards;
+    }
+
+    public void setCallCards(List<CallCard> callCards) {
+        this.callCards = callCards;
+    }
+
     public Long getId() {
         return id;
     }
