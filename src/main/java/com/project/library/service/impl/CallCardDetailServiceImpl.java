@@ -43,7 +43,7 @@ public class CallCardDetailServiceImpl implements CallCardDetailService {
     }
 
     @Override
-    public List<Object[]> totalBookPrice() {
-        return callCardDetailRepository.totalBookPrice();
+    public List<Object[]> totalBookPrice(Date startDate, Date endDate) {
+        return callCardDetailRepository.totalBookPrice(startDate, endDate);
     }
 }

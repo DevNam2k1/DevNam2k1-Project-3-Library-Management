@@ -50,6 +50,25 @@ public class CallCard {
     @Column(name = "total_fines")
     private Float totalFines;
 
+    @Column(name = "total_deposit_price")
+    private Float totalDepositPrice;
+
+    public Float getTotalDepositPrice() {
+        return totalDepositPrice;
+    }
+
+    public Integer getReturned() {
+        return returned;
+    }
+
+    public Date getExpectedReturnDate() {
+        return expectedReturnDate;
+    }
+
+    public void setTotalDepositPrice(Float totalDepositPrice) {
+        this.totalDepositPrice = totalDepositPrice;
+    }
+
     public Float getTotalFines() {
         return totalFines;
     }

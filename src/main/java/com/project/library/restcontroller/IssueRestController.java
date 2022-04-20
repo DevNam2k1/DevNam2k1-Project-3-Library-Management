@@ -51,6 +51,7 @@ public class IssueRestController {
     public String save(@RequestParam Map<String, String> payload){
         String menberIdStr = (String)payload.get("member");
         Float total = Float.parseFloat(payload.get("total"));
+        Float totalDepositPrice = Float.parseFloat(payload.get("totalDepositPrice"));
         String[] bookIdsStr = payload.get("books").toString().split(",");
 
         Long memberId = null;
@@ -74,6 +75,7 @@ public class IssueRestController {
         List<Book> books = bookService.get(bookIds);
 
         CallCard callCard = new CallCard();
+        callCard.setTotalDepositPrice(totalDepositPrice);
         callCard.setTotal(total);
         callCard.setExpectedReturnDate(date);
         callCard.setLibraryCard(libraryCard);

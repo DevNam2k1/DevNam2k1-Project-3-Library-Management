@@ -3,6 +3,7 @@ package com.project.library.service;
 import com.project.library.model.Book;
 import com.project.library.model.CallCardDetail;
 
+import java.util.Date;
 import java.util.List;
 
 public interface CallCardDetailService {
@@ -16,5 +17,5 @@ public interface CallCardDetailService {
 
     public CallCardDetail addNew(CallCardDetail callCardDetail);
 
-    List<Object[]> totalBookPrice();
+    List<Object[]> totalBookPrice(Date startDate, Date endDate);
 }

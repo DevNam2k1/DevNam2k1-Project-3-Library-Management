@@ -1,3 +1,5 @@
+
+
 function cateChart(id, cateLabels=[], cateInfor=[]) {
     const data = {
         labels: cateLabels,
@@ -17,3 +19,16 @@ function cateChart(id, cateLabels=[], cateInfor=[]) {
     const ctx = document.getElementById(id).getContext("2d")
     new Chart(ctx, config)
 }
+$('#saveBtn').on('click', function(){
+
+    var issue = {
+        startDate: $('#startDate').val(),
+        endDate: $('#endDate').val()
+    }
+    console.log(issue)
+    $.get( "/book-price-stats", issue).done(function (data){
+        if( data=='success' ) {
+            window.location = '/book-price-stats';
+        }
+    });
+});

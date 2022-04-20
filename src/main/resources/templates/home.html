@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Spark LMS - Dashboard</title>
     <script th:src="@{https://cdn.jsdelivr.net/npm/chart.js}"></script>
+    <script th:src="@{https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css}"></script>
+    <script th:src="@{https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css}"></script>
+
     <th:block th:replace="fragments/styles :: common"></th:block>
 
 </head>
@@ -21,7 +24,7 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-
+            <th:block th:replace="fragments/toptiles :: tiles"></th:block>
             <div class="col-lg-4">
                 <canvas id="myChart" ></canvas>
             </div>
@@ -51,7 +54,91 @@
                     </tbody>
                 </table>
             </div>
+            <div class="col-lg-12">
+                <div class="x_title">
+                    <div class="clearfix"></div>
+                    <h2>Thống kê Danh sách Mượn Sách Đã Trả</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <table id="datatable2"
+                       class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Họ Và Tên</th>
+                        <th>Sách Mượn</th>
+                        <th style="width: 100px;">Ngày Mượn</th>
+                        <th style="width: 110px;">Thành Tiền (VNĐ)</th>
+                        <th style="width: 110px;">Tiền Cọc (VNĐ)</th>
+                        <th style="width: 100px;">Tiền Phạt (VNĐ)</th>
+                        <th style="width: 100px;">Lợi Nhuận (VNĐ)</th>
 
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="i : ${borrowBook}" th:if="${i.returned == 1}">
+                        <td th:if="${i.libraryCard.student != null}" th:text="${i.libraryCard.student.studentName}"></td>
+                        <td th:if="${i.libraryCard.student == null}" th:text="${i.libraryCard.customer.customerName}"></td>
+                        <td>
+                            <ul th:id="${'issue_' + i.id}">
+                                <th:block th:each="ib : ${i.callCardDetails}">
+                                    <li th:if="${ib.returned==1}" th:text="${ib.book.bookName}"  th:data-id="${ib.id}"></li>
+                                </th:block>
+                            </ul>
+                        </td>
+                        <td th:text="${#dates.format(i.issueDate, 'dd-MM-yyyy')}"></td>
+                        <td th:text="${#numbers.formatDecimal(i.total,0, 'COMMA', 3, 'POINT')}"></td>
+                        <td th:text="${#numbers.formatDecimal(i.totalDepositPrice,0, 'COMMA', 3, 'POINT')}"></td>
+                        <td th:text="${#numbers.formatDecimal(i.totalFines,0, 'COMMA', 3, 'POINT')}"></td>
+                        <td th:if="${i.totalFines == null}" th:text="${#numbers.formatDecimal(i.total - i.totalDepositPrice ,0, 'COMMA', 3, 'POINT')}" style="color: #00CC33"><b></b></td>
+                        <td th:if="${i.totalFines != null}" th:text="${#numbers.formatDecimal(i.total - i.totalDepositPrice + i.totalFines ,0, 'COMMA', 3, 'POINT')}" style="color: #00CC33"><b></b></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="x_title">
+                    <div class="clearfix"></div>
+                    <h2>Thống kê Danh sách Mượn Sách Đã Chưa Trả</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <table id="datatable3"
+                       class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Họ Và Tên</th>
+                        <th>Sách Mượn</th>
+                        <th style="width: 100px;">Ngày Mượn</th>
+                        <th style="width: 110px;">Thành Tiền (VNĐ)</th>
+                        <th style="width: 110px;">Tiền Cọc (VNĐ)</th>
+                        <th style="width: 100px;">Tiền Phạt (VNĐ)</th>
+                        <th style="width: 100px;">Lợi Nhuận (VNĐ)</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="i : ${borrowBook}" th:if="${i.returned == 0}">
+                        <td th:if="${i.libraryCard.student != null}" th:text="${i.libraryCard.student.studentName}"></td>
+                        <td th:if="${i.libraryCard.student == null}" th:text="${i.libraryCard.customer.customerName}"></td>
+                        <td>
+                            <ul th:id="${'issue_' + i.id}">
+                                <th:block th:each="ib : ${i.callCardDetails}">
+                                    <li th:if="${ib.returned==0}" th:text="${ib.book.bookName}"  th:data-id="${ib.id}"></li>
+                                </th:block>
+                            </ul>
+                        </td>
+                        <td th:text="${#dates.format(i.issueDate, 'dd-MM-yyyy')}"></td>
+                        <td th:text="${#numbers.formatDecimal(i.total,0, 'COMMA', 3, 'POINT')}"></td>
+                        <td th:text="${#numbers.formatDecimal(i.totalDepositPrice,0, 'COMMA', 3, 'POINT')}"></td>
+                        <td th:text="${#numbers.formatDecimal(i.totalFines,0, 'COMMA', 3, 'POINT')}"></td>
+                        <td th:if="${i.totalFines == null}" th:text="${#numbers.formatDecimal(i.total - i.totalDepositPrice ,0, 'COMMA', 3, 'POINT')}" style="color: #00CC33"><b></b></td>
+                        <td th:if="${i.totalFines != null}" th:text="${#numbers.formatDecimal(i.total - i.totalDepositPrice + i.totalFines ,0, 'COMMA', 3, 'POINT')}" style="color: #00CC33"><b></b></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <!-- /page content -->
 

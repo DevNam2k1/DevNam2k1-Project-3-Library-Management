@@ -37,8 +37,10 @@
                                 <th>Sách Mượn</th>
                                 <th style="width: 100px;">Ngày Mượn</th>
                                 <th style="width: 110px;">Thành Tiền (VNĐ)</th>
+                                <th style="width: 110px;">Tiền Cọc (VNĐ)</th>
                                 <th style="width: 100px;">Tiền Phạt (VNĐ)</th>
-                                <th style="width: 50px;">Actions</th>
+                                <th style="width: 100px;">Lợi Nhuận (VNĐ)</th>
+                                <th style="width: 60px;">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -52,9 +54,12 @@
                                         </th:block>
                                     </ul>
                                 </td>
-                                <td th:text="${#dates.format(i.issueDate, 'dd-MMM-yyyy')}"></td>
+                                <td th:text="${#dates.format(i.issueDate, 'dd-MM-yyyy')}"></td>
                                 <td th:text="${#numbers.formatDecimal(i.total,0, 'COMMA', 3, 'POINT')}"></td>
+                                <td th:text="${#numbers.formatDecimal(i.totalDepositPrice,0, 'COMMA', 3, 'POINT')}"></td>
                                 <td th:text="${#numbers.formatDecimal(i.totalFines,0, 'COMMA', 3, 'POINT')}"></td>
+                                <td th:if="${i.totalFines == null}" th:text="${#numbers.formatDecimal(i.total - i.totalDepositPrice ,0, 'COMMA', 3, 'POINT')}" style="color: #00CC33"><b></b></td>
+                                <td th:if="${i.totalFines != null}" th:text="${#numbers.formatDecimal(i.total - i.totalDepositPrice + i.totalFines ,0, 'COMMA', 3, 'POINT')}" style="color: #00CC33"><b></b></td>
                                 <td>
                                     <a href="javascript:void(0);" title="Return book(s)" th:onclick="'returnBook(' + ${i.id} + ')'"><i class="fa fa-undo" style="margin-right: 20px"></i></a>
                                     <a th:href="@{'/issue/edit/' + ${i.id}}" ><i class="fa fa-edit"></i></a>

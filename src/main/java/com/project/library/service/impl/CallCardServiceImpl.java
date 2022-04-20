@@ -47,4 +47,9 @@ public class CallCardServiceImpl implements CallCardService {
     public Optional<CallCard> findById(Long id) {
         return callCardRepository.findById(id);
     }
+
+    @Override
+    public List<Object[]> totalTurnoverOfMonth(Date year, Date month) {
+        return callCardRepository.turnoverOfMoth(year, month);
+    }
 }

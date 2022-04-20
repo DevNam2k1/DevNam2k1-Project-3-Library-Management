@@ -79,6 +79,23 @@
 				</configuration>
 			</plugin>
 		</plugins>
+			<resources>
+				<resource>
+					<directory>src/main/resources</directory>
+					<filtering>true</filtering>
+					<excludes>
+						<exclude>static/vendor/font-awesome/webfonts/**</exclude>
+					</excludes>
+				</resource>
+				<resource>
+					<directory>src/main/resources</directory>
+					<filtering>false</filtering>
+					<includes>
+						<include>static/vendor/font-awesome/webfonts/**</include>
+					</includes>
+				</resource>
+			</resources>
 	</build>
+
 
 </project>

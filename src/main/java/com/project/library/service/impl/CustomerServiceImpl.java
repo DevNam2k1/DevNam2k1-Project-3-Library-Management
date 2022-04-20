@@ -45,4 +45,6 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> getAllBySort() {
         return customerRepository.findAllByOrderByCustomerNameAsc();
     }
+
+
 }

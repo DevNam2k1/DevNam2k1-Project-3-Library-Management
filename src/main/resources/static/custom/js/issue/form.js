@@ -102,6 +102,7 @@ $(document).ready(function() {
 		} else {
 			var issue = { 
 					member: $('#memberSel').val(),
+					totalDepositPrice: $('#totalDepositPrice').text(),
 				    total: $('#total').text(),
 					books: getIssuedBookIds().join()
 			}
@@ -143,6 +144,7 @@ function initBooksInTable() {
 	var trs = '';
 	var total = 0;
 	var totalBook = 0;
+	var totalDepositPrice = 0;
 
 	for( var k=0 ; k<booksToIssue.length ; k++ ) {
 		var rowNum = k+1;
@@ -157,6 +159,7 @@ function initBooksInTable() {
 
 		totalBook = parseFloat(booksToIssue[k].price) + parseFloat(booksToIssue[k].depositPrice);
 		total += totalBook;
+		totalDepositPrice += parseFloat(booksToIssue[k].depositPrice);
 
 
 	}
@@ -164,6 +167,7 @@ function initBooksInTable() {
 	$("#issueBooksTable").find("tr:gt(0)").remove();
 	$('#issueBooksTable').append( trs );
 	$('#total').text(new Intl.NumberFormat('de-DE').format(total));
+	$('#totalDepositPrice').text(new Intl.NumberFormat('de-DE').format(totalDepositPrice));
 
 
 }

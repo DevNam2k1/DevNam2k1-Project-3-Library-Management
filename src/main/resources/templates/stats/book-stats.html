@@ -28,11 +28,30 @@
             <div class="col-lg-5">
 
                 <div class="x_title">
-                    <h2>Thống kê Doanh thu theo đầu Sách</h2>
+                    <h2>Thống kê Doanh Thu theo đầu Sách</h2>
                     <div class="clearfix"></div>
                 </div>
+                <form th:action="@{/book-price-stats}" method="get" class="form-horizontal form-label-left">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Từ Ngày: <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="date" id="startDate" name="startDate" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Đến Ngày: <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="date" id="endDate" name="endDate"  class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-7" >
+                        <button type="submit" style="float:right; width: 100px;" id="saveBtn" class="btn btn-success">Save</button>
+                    </div>
+                </form>
                 <table id="datatable"
                        class="table table-striped table-bordered">
+
                     <thead>
                     <tr>
                         <th>ID</th>
