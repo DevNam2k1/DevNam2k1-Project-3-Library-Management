@@ -53,6 +53,17 @@ public class CallCard {
     @Column(name = "total_deposit_price")
     private Float totalDepositPrice;
 
+    @Column(name = "full_name")
+    private String fullName;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public Float getTotalDepositPrice() {
         return totalDepositPrice;
     }

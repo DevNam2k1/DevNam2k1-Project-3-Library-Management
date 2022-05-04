@@ -61,6 +61,17 @@ public class CallCardController {
         }
     }
 
+    @RequestMapping(value = "/print/{id}", method = RequestMethod.GET)
+    public String printIssuePage(@PathVariable Long id, Model model){
+        Optional<CallCard> courseEdit = callCardService.findById(id);
+        if(courseEdit.isPresent()) {
+            courseEdit.ifPresent(course -> model.addAttribute("issue", course));
+            return "/issue/print";
+        } else {
+            return "redirect:/issue/list";
+        }
+    }
+
 
 
 }

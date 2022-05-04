@@ -44,6 +44,7 @@
                                 <th style="width: 100px;">Họ Và Tên</th>
                                 <th style="width: 100px;">Giới Tính</th>
                                 <th style="width: 50px;">Hạn Thẻ (Năm)</th>
+                                <th style="width: 50px;">Thể Loại</th>
                                 <th style="width: 90px;">Ngày Làm Thẻ</th>
                                 <th style="width: 50px;">Actions</th>
                             </tr>
@@ -60,6 +61,8 @@
                                 <td th:if="${m.student == null}" th:text="${m.customer.gender}"></td>
                                 <td th:if="${m.customer == null}" th:text="${#dates.year(m.endDate) - #dates.year(m.startDate)}"></td>
                                 <td th:if="${m.student == null}" th:text="${#dates.year(m.endDate) - #dates.year(m.startDate)}"></td>
+                                <td th:if="${m.student == null}">Sinh Viên</td>
+                                <td th:if="${m.customer == null}">Khách Hàng</td>
                                 <td th:if="${m.customer == null}" th:text="${#dates.format(m.startDate, 'dd-MMM-yyyy')}"></td>
                                 <td th:if="${m.student == null}" th:text="${#dates.format(m.startDate, 'dd-MMM-yyyy')}"></td>
                                 <td>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+>
 
 
 <th:block th:fragment="menu">
@@ -26,19 +28,21 @@
 								<li><a href="/book-price-stats">Thông Kê Theo Sách</a></li>
 								<li><a href="/turnover-of-month">Thống kê Theo Tháng</a></li>
 							</ul></li>
-						<li><a><i class="fa fa-user-plus"></i> Quản Lý Nhân Viên <span
+
+						<li sec:authorize="hasAuthority('ADMIN')"><a><i class="fa fa-user"></i> Quản Lý Nhân Viên <span
 								class="fa fa-chevron-down"></span></a>
 							<ul class="nav child_menu">
 								<li><a href="/staff/add">Thêm Mới</a></li>
 								<li><a href="/staff/list">Danh Sách</a></li>
 							</ul></li>
+
 						<li><a><i class="fa fa-book"></i> Mượn Trả Sách <span
 								class="fa fa-chevron-down"></span></a>
 							<ul class="nav child_menu">
 								<li><a href="/issue/new">Lên Phiếu Mượn</a></li>
 								<li><a href="/issue/list">Danh Sách</a></li>
 							</ul></li>
-						<li><a><i class="fa fa-odnoklassniki-square"></i> Thẻ Thư Viện <span
+						<li><a><i class="fa fa-sitemap"></i> Thẻ Thư Viện <span
 								class="fa fa-chevron-down"></span></a>
 							<ul class="nav child_menu">
 								<li><a href="/library-card/add">Thẻ Cho Sinh Viên</a></li>
@@ -79,7 +83,7 @@
 								<li><a href="/author/add">Thêm Mới</a></li>
 								<li><a href="/author/list">Danh Sách</a></li>
 							</ul></li>
-						<li><a><i class="fa fa-user-secret"></i> Khách Hàng <span
+						<li><a><i class="fa fa-user"></i> Khách Hàng <span
 								class="fa fa-chevron-down"></span></a>
 							<ul class="nav child_menu">
 								<li><a href="/customer/add">Thêm Mới</a></li>
