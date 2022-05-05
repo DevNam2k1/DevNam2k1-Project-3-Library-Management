@@ -27,7 +27,7 @@ public class AuthorController {
     private AuthorService authorService;
 
 
-    @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"", "/list"}, method = RequestMethod.GET)
     public String index(Model model){
         List<Author> authors = authorService.getAllAuthor();
 
@@ -35,7 +35,7 @@ public class AuthorController {
 
         return "author/list";
     }
-
+    
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addAuthor(Model model){
         model.addAttribute("author", new Author());

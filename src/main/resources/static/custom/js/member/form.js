@@ -14,6 +14,6 @@ $(document).ready(function() {
 	}
 
 	$('#gotoListBtn').on('click', function() {
-		window.location = "/member/list";
+		window.location = "/customer/list";
 	});
 });

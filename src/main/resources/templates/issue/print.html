@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>In Phiếu Mượn</title>
+</head>
+<body th:each="i : ${issue}">
+    <h1>Phiếu Mượn Trả</h1>
+    <span><b>Họ Và Tên: </b></span> <span th:if="${i.libraryCard.student != null}" th:text="${i.libraryCard.student.studentName}"></span><span th:if="${i.libraryCard.student == null}" th:text="${i.libraryCard.student.customerName}"></span><br>
+    <span><b>Sách Mượn</b></span>
+    <ul th:id="${'issue_' + i.id}">
+        <th:block th:each="ib : ${i.callCardDetails}">
+            <li th:if="${ib.returned==0}" th:text="${ib.book.bookName}"  th:data-id="${ib.id}"></li>
+        </th:block>
+    </ul>
+    <span>
+        <b>Tiền Mượn:</b>
+    </span> <span th:text="${#numbers.formatDecimal(i.total,0, 'COMMA', 3, 'POINT')}"></span><span> VNĐ</span><br>
+    <span><b>Tiền Cọc: </b></span><span th:text="${#numbers.formatDecimal(i.totalDepositPrice,0, 'COMMA', 3, 'POINT')}"></span><span> VNĐ</span><br>
+    <span><b>Thủ Thư: </b></span><span th:text="${i.fullName}"></span>
+
+</body>
+</html>

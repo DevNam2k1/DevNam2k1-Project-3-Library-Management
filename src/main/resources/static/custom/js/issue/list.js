@@ -61,7 +61,7 @@ function returnBookConfirm() {
 			jQuery('.returnBookChk:checkbox:checked').each(function (i){
 				ids.push( $(this).val() );
 			});
-			$.post( '/rest/issue/'+selectedIssueId+'/return' , {ids: ids.join(',')} ).done(function (msg){
+			$.get( '/rest/issue/'+selectedIssueId+'/pay' , {ids: ids.join(',')} ).done(function (msg){
 				if( msg=='successful' ) {
 					window.location = '/issue/list';
 				}

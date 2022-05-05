@@ -8,5 +8,5 @@ function removeMemberDialog(el) {
 
 function removeMember() {
 	$('.remove-member-modal').modal('hide');
-	window.location = "/member/remove/" + memberId;
+	window.location = "/customer/remove/" + memberId;
 }

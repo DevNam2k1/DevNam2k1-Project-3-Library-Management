@@ -4,24 +4,24 @@ $(document).ready(function() {
 	});
 	
 	$('#category-selectbox').on('change', function() {
-		updateTagField();
+		updateBookCodeField();
 	});
 	
 	$('#resetBtn').on('click', function() {
 		setTimeout(function(){
-			updateTagField();
+			updateBookCodeField();
 		}, 10);
 		
 	});
 	
-	function updateTagField() {
-		var shortName =  $("#category-selectbox option:selected").attr("short-name");
-		if( shortName ) {
-			$('#tag').val( shortName + '-' );
+	function updateBookCodeField() {
+		var bookCategoryCode =  $("#category-selectbox option:selected").attr("book-category-code");
+		if( bookCategoryCode ) {
+			$('#bookCode').val( bookCategoryCode + '-' );
 		}
 	}
 	
 	if( !$('#id').val() ) {
-		updateTagField();
+		updateBookCodeField();
 	}
 });

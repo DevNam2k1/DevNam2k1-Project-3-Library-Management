@@ -45,4 +45,9 @@ public class AuthorServiceImpl implements AuthorService{
 		return authorRepository.findById(id);
 	}
 
+	@Override
+	public List<Author> getAllBySort() {
+		return authorRepository.findAllByOrderByAuthorNameAsc();
+	}
+
 }

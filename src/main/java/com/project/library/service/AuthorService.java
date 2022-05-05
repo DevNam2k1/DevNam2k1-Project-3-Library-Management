@@ -17,4 +17,7 @@ public interface AuthorService {
     void deleteAuthor(Long id);
 
     Optional<Author> findAuthorById(Long id);
+    
+    List<Author> getAllBySort();
+    
 }
